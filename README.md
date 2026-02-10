@@ -9,6 +9,34 @@ A Model Context Protocol (MCP) server for the Corpus Tracker application. This s
 - **Finance Tracking**: Log income and expenses, view transaction history, and analyze cash flow.
 - **Secure Authentication**: Uses API Key authentication to communicate with your Corpus Tracker backend.
 
+## Available Tools
+
+### Profile & Management
+- `get_my_profile`: Get the current user's profile and settings.
+- `list_corpora`: List all corpora (profiles) the user belongs to.
+
+### Analytics
+- `get_portfolio_summary`: Get aggregated net worth, asset breakdown, and liabilities.
+- `get_top_holdings(limit)`: Get top holdings by value.
+
+### Gold Holdings
+- `list_gold_holdings`: List all gold holdings.
+- `add_gold_holding(weight_grams, purchase_price, purchase_date)`: Add a new gold holding.
+- `delete_gold_holding(holding_id)`: Delete a gold holding by ID.
+
+### Stock Holdings
+- `list_stock_holdings`: List all stock holdings.
+- `add_stock_holding(symbol, quantity, avg_price)`: Add a new stock holding.
+- `update_stock_holding(holding_id, symbol, quantity, avg_price)`: Update an existing stock holding.
+- `delete_stock_holding(holding_id)`: Delete a stock holding by ID.
+
+### Financial Transactions
+- `list_transactions(start_date, end_date, category, type, limit)`: List transactions with filters.
+- `add_transaction(type, amount, category, description, date)`: Add a new income or expense transaction.
+- `delete_transaction(txn_id)`: Delete a transaction by ID.
+- `get_cashflow_trend(days)`: Get income vs expense trend for the last N days.
+
+
 ## Installation
 
 ```bash
@@ -19,7 +47,7 @@ pip install corpus-mcp
 
 The server requires two environment variables to connect to your backend:
 
-- `API_URL`: The URL of your Corpus Tracker backend API (e.g., `http://localhost:8000/api/v1` or your production URL).
+- `API_URL`: The URL of your Corpus Tracker backend API (e.g., `https://my-corpus.vercel.app/api/v1`).
 - `API_KEY`: Your personal API Key generated from the Corpus Tracker settings.
 
 ## Usage
@@ -30,11 +58,11 @@ You can run the server directly:
 
 ```bash
 # Set environment variables
-export API_URL="http://localhost:8000/api/v1"
+export API_URL="https://my-corpus.vercel.app/api/v1"
 export API_KEY="sk_..."
 
 # Run the server
-mcp-server
+corpus-mcp
 ```
 
 ### Using with Claude Desktop
@@ -45,14 +73,12 @@ Add the following configuration to your `claude_desktop_config.json`:
 {
   "mcpServers": {
     "corpus-tracker": {
-      "command": "uv",
+      "command": "uvx",
       "args": [
-        "tool",
-        "run",
         "corpus-mcp"
       ],
       "env": {
-        "API_URL": "http://localhost:8000/api/v1",
+        "API_URL": "https://my-corpus.vercel.app/api/v1",
         "API_KEY": "your_api_key_here"
       }
     }
@@ -69,7 +95,7 @@ To install dependencies and run locally:
 pip install .
 
 # Run dev server
-mcp-server
+corpus-mcp
 ```
 
 ## License

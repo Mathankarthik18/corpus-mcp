@@ -6,7 +6,7 @@ from typing import Optional, Dict, Any, List
 # Load environment variables
 load_dotenv()
 
-API_URL = os.getenv("API_URL", "http://localhost:8000/api/v1")
+API_URL = os.getenv("API_URL", "https://my-corpus.vercel.app/api/v1")
 API_KEY = os.getenv("API_KEY")
 
 if not API_KEY:

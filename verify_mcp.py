@@ -1,19 +1,16 @@
 import asyncio
 import os
 import sys
-from dotenv import load_dotenv
 
 # Add src to path
 sys.path.append(os.path.join(os.getcwd(), "src"))
 
-from mcp_server.server import (
+from mcp_server.main import (
     get_my_profile, 
     list_corpora, 
     get_portfolio_summary, 
-    list_gold_holdings, 
-    list_stock_holdings,
-    list_transactions,
-    get_top_holdings
+    list_gold_holdings,
+    list_transactions
 )
 
 async def verify():
