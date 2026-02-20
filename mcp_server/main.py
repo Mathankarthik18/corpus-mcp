@@ -166,6 +166,7 @@ async def add_transaction(
     """
     Add a new income or expense transaction.
     type: "income" or "expense"
+    category: get user category from get_categories tool
     """
     corpus_id = await get_corpus_id()
     payload = {
@@ -186,10 +187,55 @@ async def delete_transaction(txn_id: int) -> str:
     return str(data)
 
 @mcp.tool()
+async def get_categories() -> str:
+    """Get user budget categories."""
+    corpus_id = await get_corpus_id()
+    data = await make_request("GET", f"/categories/{corpus_id}/categories")
+    return str(data)
+
+@mcp.tool()
 async def get_cashflow_trend(days: int = 30) -> str:
     """Get income vs expense trend for the last N days."""
     corpus_id = await get_corpus_id()
     data = await make_request("GET", f"/finance/{corpus_id}/cashflow-trend?days={days}")
+    return str(data)
+
+@mcp.tool()
+async def live_gold_price() -> str:
+    """Get live gold price."""
+    corpus_id = await get_corpus_id()
+    data = await make_request("GET", f"/gold/price")
+    return str(data)
+
+@mcp.tool()
+async def history_of_gold_price(limit: int = 30) -> str:
+    """Get history of gold price."""
+    corpus_id = await get_corpus_id()
+    data = await make_request("GET", f"/gold/{corpus_id}/history?limit={limit}")
+    return str(data)
+
+@mcp.tool()
+async def search_stock_symbol(query: str) -> str:
+    """Get history of stock price."""
+    corpus_id = await get_corpus_id()
+    data = await make_request("GET", f"/stocks/search-symbol?query={query}")
+    return str(data)
+
+@mcp.tool()
+async def add_stock_transaction(symbol: str, holding_id: int, 
+                                transaction_type: str, quantity: int,
+                                price_per_share: int, transaction_date: str,
+                                notes: str) -> str:
+    """Add a new transaction to a stock holdind"""
+    corpus_id = await get_corpus_id()
+    data = await make_request("GET", f"/stocks/{corpus_id}/stocks/{holding_id}/transactions",
+                                payload={
+                                    "transaction_type": transaction_type,
+                                    "quantity": quantity,
+                                    "price_per_share": price_per_share,
+                                    "transaction_date": transaction_date,
+                                    "notes": notes
+                                })
     return str(data)
 
 def main():
