@@ -160,10 +160,11 @@ async def search_stock_symbol(query: str) -> str:
 
 @mcp.tool()
 async def add_stock_transaction(symbol: str, holding_id: int, 
-                                transaction_type: Literal["BUY", "SELL"], quantity: int,
+                                transaction_type: str, quantity: int,
                                 price_per_share: int, transaction_date: str,
                                 notes: str) -> str:
-    """Add a new transaction to a stock holdind"""
+    """Add a new transaction to a stock holdind transaction_type: BUY or SELL"""
+
     corpus_id = await get_corpus_id()
     data = await make_request("GET", f"/stocks/{corpus_id}/stocks/{holding_id}/transactions",
                                 payload={
