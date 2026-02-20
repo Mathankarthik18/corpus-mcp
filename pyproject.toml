@@ -1,6 +1,6 @@
 [project]
 name = "corpus-mcp"
-version = "0.1.1"
+version = "0.1.2"
 description = "MCP Server for Corpus Tracker - Financial Portfolio Assistant"
 authors = [
     { name = "Mathan Karthik", email = "mathanbe18@gmail.com" }

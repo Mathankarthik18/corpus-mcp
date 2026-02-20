@@ -18,17 +18,22 @@ A Model Context Protocol (MCP) server for the Corpus Tracker application. This s
 ### Analytics
 - `get_portfolio_summary`: Get aggregated net worth, asset breakdown, and liabilities.
 - `get_top_holdings(limit)`: Get top holdings by value.
+- `get_portfolio_history`: Get portfolio history.
 
 ### Gold Holdings
 - `list_gold_holdings`: List all gold holdings.
 - `add_gold_holding(weight_grams, purchase_price, purchase_date)`: Add a new gold holding.
 - `delete_gold_holding(holding_id)`: Delete a gold holding by ID.
+- `live_gold_price()`: Get live gold price.
+- `history_of_gold_price(limit)`: Get history of gold price.
 
 ### Stock Holdings
 - `list_stock_holdings`: List all stock holdings.
 - `add_stock_holding(symbol, quantity, avg_price)`: Add a new stock holding.
 - `update_stock_holding(holding_id, symbol, quantity, avg_price)`: Update an existing stock holding.
 - `delete_stock_holding(holding_id)`: Delete a stock holding by ID.
+- `live_stock_price(symbol)`: Get live stock price.
+- `history_of_stock_price(symbol, limit)`: Get history of stock price.
 
 ### Financial Transactions
 - `list_transactions(start_date, end_date, category, type, limit)`: List transactions with filters.
@@ -36,6 +41,16 @@ A Model Context Protocol (MCP) server for the Corpus Tracker application. This s
 - `delete_transaction(txn_id)`: Delete a transaction by ID.
 - `get_cashflow_trend(days)`: Get income vs expense trend for the last N days.
 
+### Stock Transactions
+- `search_stock_symbol(query)`: Search for stock symbols.
+- `add_stock_transaction(symbol, holding_id, transaction_type, quantity, price_per_share, transaction_date, notes)`: Add a new stock transaction.
+
+### Mutual Fund Holdings
+- `list_mutual_fund_holdings`: List all mutual fund holdings.
+
+### Emergency Fund Management
+- `list_emergency_fund_holdings`: List all emergency fund holdings.
+- `add_emergency_fund_contribution(amount, date, source, notes)`: Add a new emergency fund contribution.
 
 ## Installation
 
